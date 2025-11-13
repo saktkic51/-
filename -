@@ -47,14 +47,14 @@ local Window = Luna:CreateWindow({
 		RootFolder = nil, 
 		ConfigFolder = "S19 Hub" 
 	},
-	KeySystem = true, --false
+	KeySystem = false, 
 	KeySettings = {
 		Title = "Please input your provided key",
 		Subtitle = "Key System",
 		Note = "Contact 'Creator' for help.",
 		SaveInRoot = false, 
-		SaveKey = false, --true
-		Key = {"LMAO","truexd"}, 
+		SaveKey = true, 
+		Key = {}, 
 		SecondAction = {
 			Enabled = false,
 			Type = "Link", 
