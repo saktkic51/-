@@ -154,7 +154,7 @@ door_section:CreateButton({
 	end,
 });
 teleport_tab:CreateLabel({
-	Text = "Teleports can fail if your ping is too high, if this occurs config retry count.";
+	Text = "Teleports can fail if your ping is too high.";
 	Style = 2;
 });
 local teleport_locations: {[string]: CFrame} = {
@@ -186,33 +186,21 @@ local teleport_locations: {[string]: CFrame} = {
 	["Gate B outside"]  = CFrame.new(849, 527, 593);
 	["Gate B tower"]  = CFrame.new(871, 499, 461);
 };
-local config = teleport_tab:CreateSection("Config");
-local Try: number = 17;
-config:CreateSlider({Name = "Teleport retry count",
-	Range = {1, 50},
-	Increment = 2, 
-	CurrentValue = 17;
-	Callback = @native function(value: number): ()
-		Try = value;
-		return;
-	end;	
-});
 local players_section = teleport_tab:CreateSection("Players");
 local teleport_to_location; teleport_to_location = @native function(Cframe: CFrame)
-	for i: number = 1, Try do
-		wait();
-		if not Player or not Player.Character or not Player.Character:FindFirstChild("Humanoid") then
-			continue;
-		end;
-		Player.Character:PivotTo(CFrame.new(538.700073, 34, -190.999969, 0, 1, 0, 0, 0, 1, 1, 0, 0));
-	end;
-	wait(0.2);
-	for i: number = 1, Try do
-		task.wait();
-		if not Player or not Player.Character or not Player.Character:FindFirstChild("Humanoid") then
-			continue;
-		end;
-		Player.Character:PivotTo(Cframe);
+	local root = Player.Character:WaitForChild("HumanoidRootPart");
+
+	local targetPos = Vector3.new(846, 463, 878)
+    local distance = 1
+
+	local heartbeat
+	local currentPos = root.Position;
+	root:PivotTo(CFrame.new(538.300049, 34, -191));
+	
+	    if (currentPos - targetPos).Magnitude <= distance then
+		    root:PivotTo(CFrame.new(Cframe));
+		    heartbeat:Disconnect();
+	    end;
 	end;
 end;
 players_section:CreateDropdown({
