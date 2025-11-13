@@ -190,17 +190,17 @@ local players_section = teleport_tab:CreateSection("Players");
 local teleport_to_location; teleport_to_location = @native function(Cframe: CFrame)
 	local root = Player.Character:WaitForChild("HumanoidRootPart");
 
-	local targetPos = Vector3.new(846, 463, 878)
-    local distance = 1
+	local targetPos = Vector3.new(846, 463, 878);
+    local distance = 1;
 
 	local heartbeat
+    run_service.Heartbeat:Connect(function();
 	local currentPos = root.Position;
 	root:PivotTo(CFrame.new(538.300049, 34, -191));
 	
-	    if (currentPos - targetPos).Magnitude <= distance then
-		    root:PivotTo(CFrame.new(Cframe));
-		    heartbeat:Disconnect();
-	    end;
+	if (currentPos - targetPos).Magnitude <= distance then
+		root:PivotTo(CFrame.new(Cframe));
+		heartbeat:Disconnect();
 	end;
 end;
 players_section:CreateDropdown({
