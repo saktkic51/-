@@ -436,7 +436,7 @@ helpful_tab:CreateButton({
 	Callback = @native function(toggle: boolean): ()
 		for _,v in workspace.Ignore:GetChildren() do
 			if tostring(v) == "Block" or tostring(v) == "CI" then
-				v.Transparency = 1;
+				v:Destroy();
 			end;
 		end;
 		return;
